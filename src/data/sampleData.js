@@ -1,0 +1,141 @@
+export const sampleLeads = [
+  {
+    id: '1',
+    name: 'María González',
+    email: 'maria@techcorp.com',
+    phone: '+54911234567',
+    company: 'TechCorp',
+    position: 'Gerente Marketing',
+    source: 'Formulario Web',
+    status: 'Lead Caliente',
+    score: 95,
+    industry: 'E-commerce',
+    companySize: 'Pequeña',
+    budget: '$2500',
+    interest: 'Automatización WhatsApp',
+    createdAt: '2025-06-20T10:30:00Z',
+    lastInteraction: '2025-06-24T14:20:00Z',
+    nextFollowUp: '2025-06-25T09:00:00Z',
+    notes: 'Muy interesada en automatización. Demo agendada para mañana.'
+  },
+  {
+    id: '2',
+    name: 'Carlos López',
+    email: 'carlos@startup.com',
+    phone: '+54911234568',
+    company: 'StartupABC',
+    position: 'CEO',
+    source: 'Redes Sociales',
+    status: 'Lead Tibio',
+    score: 82,
+    industry: 'SaaS',
+    companySize: 'Micro',
+    budget: '$1200',
+    interest: 'CRM Personalizado',
+    createdAt: '2025-06-19T15:45:00Z',
+    lastInteraction: '2025-06-23T11:30:00Z',
+    nextFollowUp: '2025-06-26T10:00:00Z',
+    notes: 'Respondió positivamente al primer contacto. Enviar caso de éxito.'
+  },
+  {
+    id: '3',
+    name: 'Ana Martínez',
+    email: 'ana@comercio.com',
+    phone: '+54911234569',
+    company: 'Comercio Digital',
+    position: 'Directora IT',
+    source: 'Google Ads',
+    status: 'Cliente',
+    score: 100,
+    industry: 'Retail',
+    companySize: 'Mediana',
+    budget: '$4500',
+    interest: 'E-commerce Completo',
+    createdAt: '2025-06-15T09:20:00Z',
+    lastInteraction: '2025-06-24T16:45:00Z',
+    nextFollowUp: '2025-07-01T14:00:00Z',
+    notes: 'Cliente desde hace 1 semana. Muy satisfecha con el servicio.'
+  },
+  {
+    id: '4',
+    name: 'Roberto Silva',
+    email: 'roberto@servicios.com',
+    phone: '+54911234570',
+    company: 'Servicios Pro',
+    position: 'Founder',
+    source: 'Referido',
+    status: 'Lead Caliente',
+    score: 88,
+    industry: 'Servicios',
+    companySize: 'Pequeña',
+    budget: '$3200',
+    interest: 'Automatización Completa',
+    createdAt: '2025-06-18T13:15:00Z',
+    lastInteraction: '2025-06-24T09:30:00Z',
+    nextFollowUp: '2025-06-25T15:00:00Z',
+    notes: 'Referido por cliente actual. Propuesta enviada ayer.'
+  },
+  {
+    id: '5',
+    name: 'Laura Pérez',
+    email: 'laura@consultora.com',
+    phone: '+54911234571',
+    company: 'Consultora XYZ',
+    position: 'Socia',
+    source: 'Webinar',
+    status: 'Lead Frío',
+    score: 65,
+    industry: 'Consultoría',
+    companySize: 'Mediana',
+    budget: '$1800',
+    interest: 'Marketing Digital',
+    createdAt: '2025-06-17T11:00:00Z',
+    lastInteraction: '2025-06-20T14:20:00Z',
+    nextFollowUp: '2025-06-27T10:00:00Z',
+    notes: 'Participó en webinar. Aún evaluando opciones.'
+  }
+]
+
+export const sampleMetrics = {
+  totalLeads: 25,
+  qualifiedLeads: 18,
+  conversions: 5,
+  conversionRate: 20,
+  monthlyGrowth: 15,
+  avgDealSize: 2800,
+  totalRevenue: 14000,
+  activePipeline: 8500
+}
+
+export const sampleAutomations = [
+  {
+    id: '1',
+    name: 'Secuencia Bienvenida',
+    trigger: 'Nuevo Lead',
+    status: 'Activa',
+    emails: 5,
+    openRate: 45,
+    clickRate: 12,
+    conversions: 8
+  },
+  {
+    id: '2',
+    name: 'Seguimiento Demo',
+    trigger: 'Demo Completada',
+    status: 'Activa', 
+    emails: 3,
+    openRate: 62,
+    clickRate: 25,
+    conversions: 15
+  },
+  {
+    id: '3',
+    name: 'Reactivación Leads Fríos',
+    trigger: '7 días sin interacción',
+    status: 'Pausada',
+    emails: 4,
+    openRate: 28,
+    clickRate: 6,
+    conversions: 3
+  }
+]
