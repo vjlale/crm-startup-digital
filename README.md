@@ -24,7 +24,28 @@ web/ (React + Vite + Tailwind)  ◄──REST + Socket.IO──►  server/ (Nod
 - **`web/`** — interfaz del CRM.
 - **`legacy/`** — CRM demo anterior (mock data), archivado como referencia.
 
-## 🚀 Puesta en marcha
+## 🐳 Puesta en marcha con Docker (recomendado)
+
+La forma más simple. Solo necesitas **Docker** y **Docker Compose**:
+
+```bash
+docker compose up --build
+```
+
+- Frontend: **http://localhost:8080**
+- Backend: **http://localhost:4000**
+
+La base SQLite y la sesión de WhatsApp se guardan en el volumen `wacrm-data`,
+así que **no pierdes datos ni tienes que re-escanear el QR** al reiniciar.
+Para detener: `docker compose down` (los datos se conservan).
+Para borrar también los datos: `docker compose down -v`.
+
+> Nota: la URL del backend se "hornea" en el frontend en tiempo de build
+> (`VITE_API_URL`, por defecto `http://localhost:4000`). Si vas a exponerlo en un
+> dominio/IP pública, ajústala en `docker-compose.yml` (arg `VITE_API_URL`) y
+> también `CLIENT_ORIGIN` en el servicio `server`.
+
+## 🚀 Puesta en marcha manual (sin Docker)
 
 Necesitas **Node.js 18+**. Son dos procesos (backend y frontend).
 

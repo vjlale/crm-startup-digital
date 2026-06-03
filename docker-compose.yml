@@ -1,0 +1,39 @@
+# WaCRM — orquestación con Docker Compose.
+# Levanta backend (Baileys + API) y frontend (nginx) con un solo comando:
+#   docker compose up --build
+#
+# Frontend:  http://localhost:8080
+# Backend:   http://localhost:4000
+#
+# El volumen "wacrm-data" guarda la base SQLite y la sesión de WhatsApp,
+# así no hay que re-escanear el QR ni se pierden los datos al reiniciar.
+
+services:
+  server:
+    build: ./server
+    ports:
+      - "4000:4000"
+    environment:
+      PORT: 4000
+      # Debe coincidir con el origen del frontend (para CORS).
+      CLIENT_ORIGIN: http://localhost:8080
+      DATABASE_URL: file:/app/data/dev.db
+      WA_AUTH_DIR: /app/data/.wa-auth
+    volumes:
+      - wacrm-data:/app/data
+    restart: unless-stopped
+
+  web:
+    build:
+      context: ./web
+      args:
+        # URL del backend tal como la ve el navegador del host.
+        VITE_API_URL: http://localhost:4000
+    ports:
+      - "8080:80"
+    depends_on:
+      - server
+    restart: unless-stopped
+
+volumes:
+  wacrm-data:
