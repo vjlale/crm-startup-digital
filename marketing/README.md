@@ -28,7 +28,7 @@ marketing/
 | Landing page | ✅ Hecho (v1) | `landing/index.html` |
 | Demo seed para capturas | ✅ Hecho | `../server/scripts/seed-demo.js` |
 | Capturas reales de la app | ⏳ Pendiente (requiere navegador local) | `screenshots/README.md` |
-| Diseño fino en Figma | ⏳ Pendiente (requiere Figma MCP) | — |
+| Sistema de diseño en Figma | ✅ Hecho (Brand + 4 plantillas IG editables) | `figma.md` |
 | Fan page (assets + setup) | ⏳ Pendiente | `facebook/` |
 
 ## Regenerar piezas de Instagram
