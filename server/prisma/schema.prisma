@@ -1,0 +1,55 @@
+// Esquema de datos del CRM-WhatsApp.
+// SQLite: cero-configuración, un archivo local. Cambiable a Postgres en producción.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Contact {
+  id        String   @id @default(cuid())
+  // JID de WhatsApp, ej: 549112345678@s.whatsapp.net
+  jid       String   @unique
+  phone     String?
+  name      String?
+  pushName  String?
+  avatarUrl String?
+  isGroup   Boolean  @default(false)
+
+  // Datos de CRM
+  status    String   @default("Nuevo") // Nuevo, Contactado, Calificado, Negociación, Cliente, Perdido
+  score     Int      @default(0)        // 0-100, calificación manual
+  tags      String   @default("")        // CSV simple de etiquetas
+  notes     String   @default("")
+  assignedTo String?
+
+  unreadCount Int     @default(0)
+  lastMessageAt DateTime?
+  lastMessagePreview String?
+
+  messages  Message[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  waId      String?  @unique // id del mensaje en WhatsApp
+  contact   Contact  @relation(fields: [contactId], references: [id], onDelete: Cascade)
+  contactId String
+
+  fromMe    Boolean  @default(false)
+  body      String   @default("")
+  type      String   @default("text") // text, image, audio, video, document, other
+  status    String   @default("sent")  // sent, delivered, read, pending, error
+  timestamp DateTime @default(now())
+
+  createdAt DateTime @default(now())
+
+  @@index([contactId, timestamp])
+}
