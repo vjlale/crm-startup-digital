@@ -126,9 +126,142 @@ function tresPasos() {
   `)
 }
 
+// ---- Plantillas de carrusel (reutilizables) ----
+const headerLight = (y = 70) =>
+  `${isotipo(80, y, 64, 'brand')}<text x="160" y="${y + 44}" font-family="${FONT}" font-size="30" font-weight="800" fill="${C.slate900}">Konversa</text>`
+const headerDark = (y = 80) =>
+  `${isotipo(80, y, 60, 'brand')}<text x="155" y="${y + 42}" font-family="${FONT}" font-size="28" font-weight="800" fill="#ffffff">Konversa</text>`
+
+// Portada de carrusel
+function coverSlide(name, kicker, titleLines) {
+  render(name, 1080, 1350, `
+    <rect width="1080" height="1350" fill="${C.slate100}"/>
+    <rect width="1080" height="18" fill="url(#brandGrad)"/>
+    ${headerLight(70)}
+    <text x="80" y="320" font-family="${FONT}" font-size="34" font-weight="700" fill="${C.e600}">${kicker}</text>
+    ${lines(titleLines, 80, 440, 104, `font-family="${FONT}" font-size="92" font-weight="800" letter-spacing="-2" fill="${C.slate900}"`)}
+    <text x="80" y="1270" font-family="${FONT}" font-size="30" font-weight="700" fill="${C.slate500}">Deslizá →</text>
+  `)
+}
+
+// Slide de contenido (número + título + cuerpo)
+function contentSlide(name, num, titleLines, bodyLines) {
+  render(name, 1080, 1350, `
+    <rect width="1080" height="1350" fill="${C.slate100}"/>
+    <rect width="1080" height="18" fill="url(#brandGrad)"/>
+    ${headerLight(70)}
+    <circle cx="138" cy="430" r="56" fill="url(#brandGrad)"/>
+    <text x="138" y="452" text-anchor="middle" font-family="${FONT}" font-size="56" font-weight="800" fill="#fff">${num}</text>
+    ${lines(titleLines, 80, 600, 84, `font-family="${FONT}" font-size="72" font-weight="800" letter-spacing="-1" fill="${C.slate900}"`)}
+    ${lines(bodyLines, 80, 640 + titleLines.length * 84, 56, `font-family="${FONT}" font-size="40" font-weight="500" fill="#334155"`)}
+  `)
+}
+
+// Slide de cierre (CTA, gradiente)
+function ctaSlide(name, bigLines, sub) {
+  render(name, 1080, 1350, `
+    <rect width="1080" height="1350" fill="url(#brandGradV)"/>
+    ${isotipo(490, 230, 100, 'white')}
+    ${lines(bigLines, 540, 580, 96, `text-anchor="middle" font-family="${FONT}" font-size="84" font-weight="800" fill="#ffffff"`)}
+    <text x="540" y="${580 + bigLines.length * 96 + 30}" text-anchor="middle" font-family="${FONT}" font-size="38" font-weight="600" fill="#a7f3d0">${sub}</text>
+    <rect x="270" y="1130" width="540" height="92" rx="46" fill="#ffffff"/>
+    <text x="540" y="1188" text-anchor="middle" font-family="${FONT}" font-size="34" font-weight="700" fill="${C.e700}">Probalo → alenia.online</text>
+  `)
+}
+
+// Genera un carrusel completo (cover + contenidos + cierre)
+function carousel(slug, cover, slides, cta) {
+  coverSlide(`${slug}-1`, cover.kicker, cover.title)
+  slides.forEach((s, i) => contentSlide(`${slug}-${i + 2}`, String(i + 1), s.title, s.body))
+  ctaSlide(`${slug}-${slides.length + 2}`, cta.big, cta.sub)
+}
+
+// Post simple oscuro (lista de puntos)
+function listPost(name, kicker, titleLines, items, footer) {
+  let y = 560
+  const rows = items.map((it, i) => {
+    const block = `<circle cx="118" cy="${y - 14}" r="30" fill="url(#brandGrad)"/><text x="118" y="${y - 2}" text-anchor="middle" font-family="${FONT}" font-size="30" font-weight="800" fill="#fff">${i + 1}</text><text x="175" y="${y}" font-family="${FONT}" font-size="40" font-weight="600" fill="#e2e8f0">${it}</text>`
+    y += 110
+    return block
+  }).join('')
+  render(name, 1080, 1080, `
+    <rect width="1080" height="1080" fill="${C.slate900}"/>
+    ${headerDark(80)}
+    <text x="80" y="280" font-family="${FONT}" font-size="34" font-weight="700" fill="${C.e400}">${kicker}</text>
+    ${lines(titleLines, 80, 360, 64, `font-family="${FONT}" font-size="58" font-weight="800" fill="#ffffff"`)}
+    ${rows}
+    <text x="80" y="1010" font-family="${FONT}" font-size="30" font-weight="600" fill="${C.slate500}">${footer}</text>
+  `)
+}
+
+// Historia 1080x1920
+function story(name) {
+  render(name, 1080, 1920, `
+    <rect width="1080" height="1920" fill="url(#brandGradV)"/>
+    <circle cx="980" cy="180" r="240" fill="#ffffff" opacity="0.06"/>
+    <circle cx="120" cy="1700" r="280" fill="#ffffff" opacity="0.06"/>
+    ${isotipo(490, 480, 100, 'white')}
+    <text x="540" y="900" text-anchor="middle" font-family="${FONT}" font-size="110" font-weight="800" letter-spacing="-2" fill="#ffffff">Konversa</text>
+    <text x="540" y="970" text-anchor="middle" font-family="${FONT}" font-size="34" font-weight="600" fill="#a7f3d0">CRM para WhatsApp</text>
+    ${lines(['Convertí tus chats', 'en clientes.'], 540, 1140, 84, `text-anchor="middle" font-family="${FONT}" font-size="64" font-weight="700" fill="#ffffff"`)}
+    <rect x="290" y="1500" width="500" height="96" rx="48" fill="#ffffff"/>
+    <text x="540" y="1560" text-anchor="middle" font-family="${FONT}" font-size="34" font-weight="700" fill="${C.e700}">Deslizá arriba ↑</text>
+  `)
+}
+
 console.log('🎨 Generando piezas de Instagram…')
+// Piezas base
 lanzamiento()
 featureQR()
 diferenciador()
 tresPasos()
+
+// Carruseles educativos
+carousel('05-problema',
+  { kicker: 'El problema', title: ['Vender por', 'WhatsApp', 'es un caos'] },
+  [
+    { title: ['Chats', 'mezclados'], body: ['Lo personal y las ventas,', 'todo en el mismo lugar.'] },
+    { title: ['Clientes que', 'se pierden'], body: ['Sin seguimiento,', 'la venta se enfría.'] },
+    { title: ['No sabés', 'en qué quedó'], body: ['Cada conversación', 'es un misterio.'] },
+  ],
+  { big: ['Konversa', 'ordena todo.'], sub: 'Seguinos para conocerlo' })
+
+carousel('06-calificacion',
+  { kicker: 'Función', title: ['Calificá', 'clientes', 'al instante'] },
+  [
+    { title: ['Estrellas'], body: ['Puntuá a cada cliente', 'de 0 a 100.'] },
+    { title: ['Etiquetas'], body: ['Segmentá por interés,', 'origen o lo que quieras.'] },
+    { title: ['Notas'], body: ['Guardá lo importante', 'de cada charla.'] },
+  ],
+  { big: ['Sabé a quién', 'priorizar.'], sub: 'Probalo gratis' })
+
+carousel('07-pipeline',
+  { kicker: 'Función', title: ['Tu embudo', 'de ventas', 'visual'] },
+  [
+    { title: ['Arrastrá'], body: ['Mové cada cliente', 'entre etapas.'] },
+    { title: ['Etapas claras'], body: ['De "Nuevo" a "Cliente",', 'de un vistazo.'] },
+    { title: ['Nada se', 'pierde'], body: ['Seguimiento de cada', 'venta abierta.'] },
+  ],
+  { big: ['Vendé con', 'orden.'], sub: 'Link en bio' })
+
+carousel('08-dashboard',
+  { kicker: 'Función', title: ['Tus ventas', 'en vivo'] },
+  [
+    { title: ['Métricas'], body: ['Contactos, sin leer', 'y clientes cerrados.'] },
+    { title: ['Sin planillas'], body: ['Todo en un panel', 'claro y simple.'] },
+    { title: ['Decidí', 'con datos'], body: ['Y no a ojo.'] },
+  ],
+  { big: ['Mirá cómo', 'vas hoy.'], sub: 'Comentá DEMO' })
+
+// Posts simples
+listPost('09-errores', 'Tip de ventas', ['3 errores al vender', 'por WhatsApp'],
+  ['Responder sin orden (y olvidarte).', 'No anotar en qué quedó cada cliente.', 'No hacer seguimiento.'],
+  'El tercero es el que más ventas cuesta · @konversa.app')
+
+ctaSlide('10-oferta', ['Probá Konversa', 'con tu WhatsApp', 'hoy.'], 'Sin tarjeta · Sin compromiso')
+
+// Historia
+story('11-historia')
+
 console.log('✅ Piezas en marketing/instagram/piezas/')
+

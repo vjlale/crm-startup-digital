@@ -23,7 +23,7 @@ marketing/
 | Guía de marca | ✅ Hecho | `brand/brand-guidelines.md` |
 | Calendario Instagram (4 semanas) | ✅ Hecho | `instagram/calendario.md` |
 | Copys Instagram (12 piezas) | ✅ Hecho | `instagram/copys.md` |
-| Piezas Instagram (4 PNG de muestra) | ✅ Hecho | `instagram/piezas/` |
+| Piezas Instagram (27 PNG: posts, 4 carruseles, historia) | ✅ Hecho | `instagram/piezas/` |
 | Guion PDF comercial | ✅ Hecho | `comercial/guion-presentacion.md` |
 | Landing page | ✅ Hecho (v1) | `landing/index.html` |
 | Demo seed para capturas | ✅ Hecho | `../server/scripts/seed-demo.js` |
