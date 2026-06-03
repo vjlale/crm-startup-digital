@@ -45,9 +45,13 @@ export default function LeadPanel() {
   const removeTag = (t) => patch({ tags: tags.filter((x) => x !== t) })
 
   const saveText = async () => {
-    await patch({ name, notes })
-    setSaved(true)
-    setTimeout(() => setSaved(false), 1500)
+    try {
+      await patch({ name, notes })
+      setSaved(true)
+      setTimeout(() => setSaved(false), 1500)
+    } catch (err) {
+      alert('No se pudieron guardar los cambios: ' + err.message)
+    }
   }
 
   // 5 niveles → score 0,25,50,75,100

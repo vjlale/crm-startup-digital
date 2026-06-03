@@ -53,7 +53,9 @@ router.patch('/:id', async (req, res) => {
     req.app.get('io')?.emit('wa:contact', contact)
     res.json(contact)
   } catch (e) {
-    res.status(404).json({ error: 'No encontrado' })
+    // P2025 = registro no encontrado; cualquier otro error es interno.
+    if (e.code === 'P2025') res.status(404).json({ error: 'No encontrado' })
+    else res.status(500).json({ error: 'Error interno del servidor' })
   }
 })
 
@@ -67,7 +69,8 @@ router.post('/:id/read', async (req, res) => {
     req.app.get('io')?.emit('wa:contact', contact)
     res.json(contact)
   } catch (e) {
-    res.status(404).json({ error: 'No encontrado' })
+    if (e.code === 'P2025') res.status(404).json({ error: 'No encontrado' })
+    else res.status(500).json({ error: 'Error interno del servidor' })
   }
 })
 

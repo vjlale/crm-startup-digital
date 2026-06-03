@@ -26,19 +26,25 @@ export default function Connect() {
   }
 
   const logout = async () => {
+    setError(null)
     setLoading(true)
     try {
       await api.waLogout()
       setPairingCode(null)
+    } catch (e) {
+      setError(e.message)
     } finally {
       setLoading(false)
     }
   }
 
   const connect = async () => {
+    setError(null)
     setLoading(true)
     try {
       await api.waConnect()
+    } catch (e) {
+      setError(e.message)
     } finally {
       setLoading(false)
     }

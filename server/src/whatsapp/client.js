@@ -51,65 +51,73 @@ class WhatsAppService extends EventEmitter {
     if (this.starting || this.sock) return
     this.starting = true
 
-    if (!fs.existsSync(this.authDir)) fs.mkdirSync(this.authDir, { recursive: true })
+    try {
+      if (!fs.existsSync(this.authDir)) fs.mkdirSync(this.authDir, { recursive: true })
 
-    const { state, saveCreds } = await useMultiFileAuthState(this.authDir)
-    const { version } = await fetchLatestBaileysVersion()
+      const { state, saveCreds } = await useMultiFileAuthState(this.authDir)
+      const { version } = await fetchLatestBaileysVersion()
 
-    this.setState('connecting', { log: true })
+      this.setState('connecting', { log: true })
 
-    this.sock = makeWASocket({
-      version,
-      auth: state,
-      logger,
-      printQRInTerminal: false,
-      browser: ['WaCRM', 'Chrome', '1.0.0'],
-      markOnlineOnConnect: false,
-      syncFullHistory: false,
-    })
+      this.sock = makeWASocket({
+        version,
+        auth: state,
+        logger,
+        printQRInTerminal: false,
+        browser: ['WaCRM', 'Chrome', '1.0.0'],
+        markOnlineOnConnect: false,
+        syncFullHistory: false,
+      })
 
-    this.sock.ev.on('creds.update', saveCreds)
+      this.sock.ev.on('creds.update', saveCreds)
 
-    this.sock.ev.on('connection.update', async (update) => {
-      const { connection, lastDisconnect, qr } = update
+      this.sock.ev.on('connection.update', async (update) => {
+        const { connection, lastDisconnect, qr } = update
 
-      if (qr) {
-        this.lastQrDataUrl = await qrcode.toDataURL(qr)
-        this.setState('qr', { log: true })
-      }
-
-      if (connection === 'open') {
-        this.me = this.sock.user || null
-        this.lastQrDataUrl = null
-        this.setState('connected', { log: true })
-      }
-
-      if (connection === 'close') {
-        const statusCode = lastDisconnect?.error?.output?.statusCode
-        const loggedOut = statusCode === DisconnectReason.loggedOut
-        this.sock = null
-        this.starting = false
-        this.setState('disconnected', { log: true })
-
-        if (loggedOut) {
-          // Sesión cerrada desde el teléfono: borrar credenciales para forzar nuevo QR.
-          this.clearAuth()
-        } else {
-          // Reconexión automática (red caída, reinicio, etc.)
-          setTimeout(() => this.start().catch((e) => console.error('reconnect error', e)), 2500)
+        if (qr) {
+          this.lastQrDataUrl = await qrcode.toDataURL(qr)
+          this.setState('qr', { log: true })
         }
-      }
-    })
 
-    this.sock.ev.on('messages.upsert', ({ messages, type }) => {
-      if (type !== 'notify') return
-      for (const m of messages) {
-        const normalized = this.normalizeMessage(m)
-        if (normalized) this.emit('message', normalized)
-      }
-    })
+        if (connection === 'open') {
+          this.me = this.sock.user || null
+          this.lastQrDataUrl = null
+          this.setState('connected', { log: true })
+        }
 
-    this.starting = false
+        if (connection === 'close') {
+          const statusCode = lastDisconnect?.error?.output?.statusCode
+          const loggedOut = statusCode === DisconnectReason.loggedOut
+          this.sock = null
+          this.starting = false
+          this.setState('disconnected', { log: true })
+
+          if (loggedOut) {
+            // Sesión cerrada desde el teléfono: borrar credenciales para forzar nuevo QR.
+            this.clearAuth()
+          } else {
+            // Reconexión automática (red caída, reinicio, etc.)
+            setTimeout(() => this.start().catch((e) => console.error('reconnect error', e)), 2500)
+          }
+        }
+      })
+
+      this.sock.ev.on('messages.upsert', ({ messages, type }) => {
+        if (type !== 'notify') return
+        for (const m of messages) {
+          const normalized = this.normalizeMessage(m)
+          if (normalized) this.emit('message', normalized)
+        }
+      })
+    } catch (e) {
+      // Si el arranque falla (p. ej. sin internet), dejar el estado limpio
+      // para no bloquear futuros intentos de reconexión.
+      this.sock = null
+      this.setState('disconnected', { log: true })
+      throw e
+    } finally {
+      this.starting = false
+    }
   }
 
   normalizeMessage(m) {
