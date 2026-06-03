@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useId } from 'react'
 import { Routes, Route, NavLink, Navigate } from 'react-router-dom'
 import { MessageSquare, LayoutDashboard, KanbanSquare, QrCode } from 'lucide-react'
 import { useStore } from './store/useStore.js'
@@ -13,6 +13,24 @@ const NAV = [
   { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { to: '/connect', label: 'Conexión', icon: QrCode },
 ]
+
+// Isotipo de Konversa (burbuja/flecha de crecimiento) en formato compacto.
+function Logo({ size = 36 }) {
+  const id = useId()
+  return (
+    <svg width={size} height={size} viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id={id} x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#10b981" />
+          <stop offset="1" stopColor="#047857" />
+        </linearGradient>
+      </defs>
+      <rect width="64" height="64" rx="16" fill={`url(#${id})`} />
+      <path d="M18 38 26 30l6 6 11-13" stroke="#fff" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      <path d="M38 23h7v7" stroke="#fff" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+    </svg>
+  )
+}
 
 function ConnectionDot() {
   const state = useStore((s) => s.waStatus.state)
@@ -39,15 +57,13 @@ export default function App() {
   }, [init])
 
   return (
-    <div className="flex h-full">
-      {/* Sidebar */}
-      <aside className="flex w-60 flex-col bg-slate-900 text-white">
-        <div className="flex items-center gap-2 px-5 py-5">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-500 text-lg">
-            💬
-          </div>
+    <div className="flex h-full flex-col md:flex-row">
+      {/* Sidebar (desktop) */}
+      <aside className="hidden w-60 flex-col bg-slate-900 text-white md:flex">
+        <div className="flex items-center gap-2.5 px-5 py-5">
+          <Logo size={38} />
           <div>
-            <div className="font-bold leading-tight">WaCRM</div>
+            <div className="font-bold leading-tight">Konversa</div>
             <ConnectionDot />
           </div>
         </div>
@@ -74,8 +90,17 @@ export default function App() {
         </div>
       </aside>
 
+      {/* Barra superior (móvil) */}
+      <header className="flex items-center justify-between bg-slate-900 px-4 py-3 text-white md:hidden">
+        <div className="flex items-center gap-2">
+          <Logo size={32} />
+          <span className="font-bold">Konversa</span>
+        </div>
+        <ConnectionDot />
+      </header>
+
       {/* Contenido */}
-      <main className="flex-1 overflow-hidden">
+      <main className="min-h-0 flex-1 overflow-hidden">
         <Routes>
           <Route path="/" element={<Navigate to="/inbox" replace />} />
           <Route path="/inbox" element={<Inbox />} />
@@ -84,6 +109,24 @@ export default function App() {
           <Route path="/connect" element={<Connect />} />
         </Routes>
       </main>
+
+      {/* Navegación inferior (móvil) */}
+      <nav className="flex border-t border-slate-800 bg-slate-900 text-white md:hidden">
+        {NAV.map(({ to, label, icon: Icon }) => (
+          <NavLink
+            key={to}
+            to={to}
+            className={({ isActive }) =>
+              `flex flex-1 flex-col items-center gap-1 py-2.5 text-[11px] font-medium transition ${
+                isActive ? 'text-emerald-400' : 'text-slate-400'
+              }`
+            }
+          >
+            <Icon size={20} />
+            {label}
+          </NavLink>
+        ))}
+      </nav>
     </div>
   )
 }

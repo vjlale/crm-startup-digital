@@ -29,7 +29,7 @@ marketing/
 | Demo seed para capturas | ✅ Hecho | `../server/scripts/seed-demo.js` |
 | Capturas reales de la app | ⏳ Pendiente (requiere navegador local) | `screenshots/README.md` |
 | Sistema de diseño en Figma | ✅ Hecho (Brand + 4 plantillas IG editables) | `figma.md` |
-| Fan page (assets + setup) | ⏳ Pendiente | `facebook/` |
+| Fan page (foto perfil + portada) | ✅ Hecho | `facebook/` |
 
 ## Regenerar piezas de Instagram
 ```bash

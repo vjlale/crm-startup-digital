@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
-import { Send } from 'lucide-react'
+import { Send, ArrowLeft, UserRound } from 'lucide-react'
 import { useStore } from '../store/useStore.js'
 import { displayName, formatTime } from '../lib/constants.js'
 
-export default function ChatWindow() {
+export default function ChatWindow({ onOpenLead }) {
   const contact = useStore((s) => s.activeContact())
   const messages = useStore((s) => s.messages)
   const send = useStore((s) => s.sendMessage)
+  const closeChat = useStore((s) => s.closeChat)
   const waState = useStore((s) => s.waStatus.state)
   const [text, setText] = useState('')
   const [sending, setSending] = useState(false)
@@ -44,14 +45,28 @@ export default function ChatWindow() {
   return (
     <div className="flex flex-1 flex-col bg-[#f0f2f5]">
       {/* Cabecera */}
-      <div className="flex items-center gap-3 border-b border-slate-200 bg-white px-5 py-3">
+      <div className="flex items-center gap-3 border-b border-slate-200 bg-white px-3 py-3 md:px-5">
+        <button
+          onClick={closeChat}
+          className="flex h-9 w-9 items-center justify-center rounded-full text-slate-500 hover:bg-slate-100 md:hidden"
+          aria-label="Volver"
+        >
+          <ArrowLeft size={20} />
+        </button>
         <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 text-sm font-semibold text-white">
           {displayName(contact).charAt(0).toUpperCase()}
         </div>
-        <div>
-          <div className="text-sm font-semibold text-slate-800">{displayName(contact)}</div>
+        <div className="min-w-0 flex-1">
+          <div className="truncate text-sm font-semibold text-slate-800">{displayName(contact)}</div>
           <div className="text-xs text-slate-400">{contact.phone}</div>
         </div>
+        <button
+          onClick={onOpenLead}
+          className="flex h-9 items-center gap-1.5 rounded-full border border-slate-200 px-3 text-sm font-medium text-slate-600 hover:bg-slate-50 lg:hidden"
+          aria-label="Ver ficha del cliente"
+        >
+          <UserRound size={18} /> Ficha
+        </button>
       </div>
 
       {/* Mensajes */}

@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
-import { Star, Tag, Save, Check } from 'lucide-react'
+import { Star, Tag, Save, Check, X } from 'lucide-react'
 import { useStore } from '../store/useStore.js'
 import { LEAD_STATUSES, STATUS_STYLES, displayName } from '../lib/constants.js'
 
-// Panel lateral de CRM: calificar y etiquetar al lead sin salir del chat.
-export default function LeadPanel() {
+// Panel de CRM: calificar y etiquetar al lead sin salir del chat.
+// Desktop (lg+): columna fija a la derecha. Móvil/tablet: panel deslizable (open/onClose).
+export default function LeadPanel({ open = false, onClose = () => {} }) {
   const contact = useStore((s) => s.activeContact())
   const updateContact = useStore((s) => s.updateContact)
 
@@ -29,9 +30,7 @@ export default function LeadPanel() {
 
   const tags = (contact.tags || '').split(',').map((t) => t.trim()).filter(Boolean)
   const score = contact.score || 0
-
   const patch = (data) => updateContact(contact.id, data)
-
   const setStatus = (status) => patch({ status })
   const setScore = (value) => patch({ score: value })
 
@@ -54,12 +53,11 @@ export default function LeadPanel() {
     }
   }
 
-  // 5 niveles → score 0,25,50,75,100
   const stars = [1, 2, 3, 4, 5]
   const activeStars = Math.round(score / 20)
 
-  return (
-    <div className="hidden w-80 flex-col overflow-y-auto border-l border-slate-200 bg-white lg:flex">
+  const body = (
+    <>
       <div className="flex flex-col items-center border-b border-slate-100 p-6">
         <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 text-2xl font-semibold text-white">
           {displayName(contact).charAt(0).toUpperCase()}
@@ -95,9 +93,7 @@ export default function LeadPanel() {
 
       {/* Calificación */}
       <div className="border-b border-slate-100 p-5">
-        <h3 className="mb-3 text-xs font-semibold uppercase tracking-wide text-slate-500">
-          Calificación
-        </h3>
+        <h3 className="mb-3 text-xs font-semibold uppercase tracking-wide text-slate-500">Calificación</h3>
         <div className="flex items-center gap-1">
           {stars.map((s) => (
             <button key={s} onClick={() => setScore(s * 20)} className="transition hover:scale-110">
@@ -158,6 +154,35 @@ export default function LeadPanel() {
           {saved ? 'Guardado' : 'Guardar notas'}
         </button>
       </div>
-    </div>
+    </>
+  )
+
+  return (
+    <>
+      {/* Desktop: columna fija */}
+      <div className="hidden w-80 flex-col overflow-y-auto border-l border-slate-200 bg-white lg:flex">
+        {body}
+      </div>
+
+      {/* Móvil/tablet: panel deslizable */}
+      {open && (
+        <div className="fixed inset-0 z-40 lg:hidden">
+          <div className="absolute inset-0 bg-black/40" onClick={onClose} />
+          <div className="absolute right-0 top-0 flex h-full w-[88%] max-w-sm flex-col overflow-y-auto bg-white shadow-2xl">
+            <div className="flex items-center justify-between border-b border-slate-100 px-4 py-3">
+              <span className="text-sm font-semibold text-slate-700">Ficha del cliente</span>
+              <button
+                onClick={onClose}
+                className="flex h-8 w-8 items-center justify-center rounded-full text-slate-500 hover:bg-slate-100"
+                aria-label="Cerrar"
+              >
+                <X size={18} />
+              </button>
+            </div>
+            {body}
+          </div>
+        </div>
+      )}
+    </>
   )
 }

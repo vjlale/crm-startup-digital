@@ -18,7 +18,7 @@ export default function ChatList() {
   }, [contacts, q])
 
   return (
-    <div className="flex h-full w-80 flex-col border-r border-slate-200 bg-white">
+    <div className="flex h-full w-full flex-col border-r border-slate-200 bg-white">
       <div className="border-b border-slate-100 p-3">
         <div className="relative">
           <Search className="absolute left-3 top-2.5 text-slate-400" size={16} />

@@ -63,6 +63,8 @@ export const useStore = create((set, get) => ({
     }))
   },
 
+  closeChat: () => set({ activeId: null, messages: [] }),
+
   sendMessage: async (text) => {
     const { activeId } = get()
     if (!activeId) return
