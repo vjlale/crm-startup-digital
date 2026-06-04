@@ -1,0 +1,13 @@
+{
+  "name": "konversa-content-factory",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Generador de piezas visuales (SVG -> PNG) para Konversa",
+  "scripts": {
+    "instagram": "node generate-instagram.js"
+  },
+  "dependencies": {
+    "@resvg/resvg-js": "^2.6.2"
+  }
+}

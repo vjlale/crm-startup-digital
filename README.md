@@ -1,1 +1,97 @@
-# CRM Startup Digital 🚀\n\n> **Una aplicación web moderna y estética para gestionar leads y clientes de tu startup de servicios digitales.**\n\n[![Live Demo](https://img.shields.io/badge/🌐-Live%20Demo-blue)](https://crm-startup-digital.vercel.app)\n[![GitHub Stars](https://img.shields.io/github/stars/vjlale/crm-startup-digital)](https://github.com/vjlale/crm-startup-digital/stargazers)\n[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)\n\n## ✨ Características Principales\n\n### 📊 Dashboard Interactivo\n- **Métricas en tiempo real** con KPIs clave\n- **Gráficos dinámicos** con Recharts\n- **Alertas y notificaciones** inteligentes\n- **Tareas urgentes** y seguimientos pendientes\n\n### 👥 Gestión Avanzada de Leads\n- **Sistema de scoring automático** (0-100 puntos)\n- **Pipeline visual** de ventas\n- **Filtros inteligentes** por estado, fuente, industria\n- **Información detallada** de cada prospecto\n- **Seguimiento temporal** completo\n\n### ⚡ Automatización Inteligente\n- **Flujos de trabajo** personalizables\n- **Email marketing** con plantillas dinámicas\n- **Triggers automáticos** basados en comportamiento\n- **Secuencias de nurturing** optimizadas\n\n### 📈 Reportes y Analytics\n- **ROI por canal** de marketing\n- **Métricas de email** (apertura, clicks, conversiones)\n- **Tendencias temporales** y análisis comparativo\n- **Distribución por industria** y segmentación\n\n## 🛠 Tecnologías\n\n- **Frontend**: React 18 + Tailwind CSS + Vite\n- **Charts**: Recharts para visualizaciones\n- **Icons**: Lucide React\n- **Backend**: Express.js + Node.js (preparado)\n- **Deployment**: Vercel/Netlify ready\n\n## 🚀 Instalación Rápida\n\n```bash\n# Clonar repositorio\ngit clone https://github.com/vjlale/crm-startup-digital.git\ncd crm-startup-digital\n\n# Instalar dependencias\nnpm install\n\n# Ejecutar en desarrollo\nnpm run dev\n\n# Abrir http://localhost:3000\n```\n\n## 📱 Capturas de Pantalla\n\n### Dashboard Principal\n![Dashboard](https://via.placeholder.com/800x400/3b82f6/ffffff?text=Dashboard+Interactivo)\n\n### Gestión de Leads\n![Leads](https://via.placeholder.com/800x400/10b981/ffffff?text=Gestión+de+Leads)\n\n### Automatización\n![Automation](https://via.placeholder.com/800x400/f59e0b/ffffff?text=Automatización)\n\n### Reportes\n![Reports](https://via.placeholder.com/800x400/ef4444/ffffff?text=Reportes+y+Analytics)\n\n## 🎯 Sistema de Scoring\n\nEl CRM incluye un sistema inteligente de scoring que evalúa leads en tiempo real:\n\n- **90-100 puntos**: 🔥 Lead Caliente (Contactar inmediatamente)\n- **70-89 puntos**: 🌡️ Lead Tibio (Contactar en 24h)\n- **50-69 puntos**: ❄️ Lead Frío (Email nurturing)\n- **0-49 puntos**: ❌ Descalificado\n\n### Criterios de Evaluación\n- **Fit de Empresa** (30%): Tamaño, industria, presupuesto\n- **Comportamiento** (40%): Navegación web, descargas, engagement\n- **Interés** (30%): Demos solicitadas, respuestas, urgencia\n\n## 🔄 Automatizaciones Incluidas\n\n### Flujos de Email\n1. **Secuencia de Bienvenida** (5 emails)\n2. **Nurturing Educativo** (7 emails)\n3. **Seguimiento Post-Demo** (3 emails)\n4. **Reactivación Leads Fríos** (4 emails)\n\n### Triggers Inteligentes\n- Nuevo lead → Email bienvenida + scoring inicial\n- Visitó pricing → Score +15 + demo offer\n- Email abierto 3x → Score +10 + seguimiento\n- Sin actividad 7 días → Reactivación automática\n\n## 📊 Métricas Clave\n\n- **Conversión por fuente**: Formulario web, RRSS, Google Ads, referidos\n- **ROI detallado**: CAC, LTV, ratio LTV:CAC\n- **Email performance**: Deliverability, opens, clicks, conversions\n- **Tendencias temporales**: Crecimiento mensual y trimestral\n\n## 🚀 Despliegue\n\n### Vercel (Recomendado)\n```bash\nnpm i -g vercel\nvercel --prod\n```\n\n### Netlify\n```bash\nnpm run build\nnetlify deploy --prod --dir=dist\n```\n\n### Docker\n```bash\ndocker build -t crm-startup .\ndocker run -p 3001:3001 crm-startup\n```\n\nVer [DEPLOYMENT.md](DEPLOYMENT.md) para guía completa.\n\n## 📋 Roadmap\n\n### ✅ Versión 1.0 (Actual)\n- Dashboard completo con métricas\n- Gestión de leads con scoring\n- Automatizaciones básicas\n- Reportes y analytics\n- Diseño responsive moderno\n\n### 🔄 Versión 2.0 (Próximos 3 meses)\n- [ ] Autenticación y roles de usuario\n- [ ] Base de datos persistente (Supabase)\n- [ ] API completa con endpoints\n- [ ] Integración WhatsApp Business\n- [ ] Sistema de citas y calendarios\n\n### 🎯 Versión 3.0 (6 meses)\n- [ ] IA avanzada para lead scoring\n- [ ] Integraciones con CRM externos\n- [ ] App móvil nativa\n- [ ] Facturación integrada\n- [ ] Reportes personalizables\n\n## 👥 Casos de Uso\n\n### Para Startups de Servicios Digitales\n- **Automatización**: WhatsApp, email marketing, CRM\n- **Desarrollo Web**: E-commerce, apps, sistemas\n- **Marketing Digital**: SEO, SEM, social media\n- **Consultoría**: Transformación digital, IA\n\n### Para Agencies\n- Gestión de múltiples clientes\n- Reportes por proyecto\n- Templates reutilizables\n- White label (próximamente)\n\n## 🤝 Contribuir\n\n¡Las contribuciones son bienvenidas!\n\n1. Fork el proyecto\n2. Crea tu feature branch (`git checkout -b feature/AmazingFeature`)\n3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)\n4. Push a la branch (`git push origin feature/AmazingFeature`)\n5. Abre un Pull Request\n\n## 📄 Licencia\n\nDistribuido bajo la licencia MIT. Ver `LICENSE` para más información.\n\n## 🙋‍♂️ Soporte\n\n- **Documentación**: [FEATURES.md](FEATURES.md)\n- **Guía de Despliegue**: [DEPLOYMENT.md](DEPLOYMENT.md)\n- **Issues**: [GitHub Issues](https://github.com/vjlale/crm-startup-digital/issues)\n- **Discusiones**: [GitHub Discussions](https://github.com/vjlale/crm-startup-digital/discussions)\n\n## ⭐ Show your support\n\n¡Dale una ⭐️ si este proyecto te ayudó!\n\n---\n\n**Desarrollado con ❤️ para startups que quieren automatizar y escalar sus ventas** 🚀\n\n[🌐 **Ver Demo Live**](https://crm-startup-digital.vercel.app) | [📖 **Documentación**](FEATURES.md) | [🚀 **Guía de Despliegue**](DEPLOYMENT.md)"
+# WaCRM — CRM para WhatsApp 💬
+
+> CRM simple, rápido e intuitivo que se vincula a **WhatsApp por QR o número** (estilo WhatsApp Web), organiza tus chats y te deja **calificar clientes manualmente** mientras conversas. **No usa la API oficial de WhatsApp**, por lo que no genera costos de mensajería.
+
+## ✨ Qué hace (v1)
+
+- 🔗 **Vinculación en 1 paso**: escanea un QR o usa código de emparejamiento por número.
+- 💬 **Bandeja en tiempo real**: recibe y responde mensajes desde el navegador.
+- 🏷️ **CRM integrado**: estado del lead, calificación (0–100), etiquetas y notas, todo en un **panel de acceso rápido al lado del chat**.
+- 📋 **Pipeline Kanban**: arrastra contactos entre estados (Nuevo → Contactado → Calificado → Negociación → Cliente / Perdido).
+- 📊 **Dashboard** con métricas en vivo.
+
+## 🏗️ Arquitectura
+
+```
+web/ (React + Vite + Tailwind)  ◄──REST + Socket.IO──►  server/ (Node + Express)
+                                                          │
+                                                  Baileys (WhatsApp Web)
+                                                          │
+                                                  SQLite (Prisma)
+```
+
+- **`server/`** — backend que mantiene la sesión de WhatsApp viva con [Baileys](https://github.com/WhiskeySockets/Baileys), guarda contactos y mensajes en SQLite (Prisma) y emite eventos en tiempo real por Socket.IO.
+- **`web/`** — interfaz del CRM.
+- **`legacy/`** — CRM demo anterior (mock data), archivado como referencia.
+
+## 🐳 Puesta en marcha con Docker (recomendado)
+
+La forma más simple. Solo necesitas **Docker** y **Docker Compose**:
+
+```bash
+docker compose up --build
+```
+
+- Frontend: **http://localhost:8080**
+- Backend: **http://localhost:4000**
+
+La base SQLite y la sesión de WhatsApp se guardan en el volumen `wacrm-data`,
+así que **no pierdes datos ni tienes que re-escanear el QR** al reiniciar.
+Para detener: `docker compose down` (los datos se conservan).
+Para borrar también los datos: `docker compose down -v`.
+
+> Nota: la URL del backend se "hornea" en el frontend en tiempo de build
+> (`VITE_API_URL`, por defecto `http://localhost:4000`). Si vas a exponerlo en un
+> dominio/IP pública, ajústala en `docker-compose.yml` (arg `VITE_API_URL`) y
+> también `CLIENT_ORIGIN` en el servicio `server`.
+
+## 🚀 Puesta en marcha manual (sin Docker)
+
+Necesitas **Node.js 18+**. Son dos procesos (backend y frontend).
+
+### 1) Backend
+
+```bash
+cd server
+cp .env.example .env
+npm install
+npm run db:push      # crea la base SQLite
+npm run dev          # arranca en http://localhost:4000
+```
+
+### 2) Frontend
+
+```bash
+cd web
+cp .env.example .env
+npm install
+npm run dev          # arranca en http://localhost:5173
+```
+
+Abre **http://localhost:5173**, ve a **Conexión** y escanea el QR con tu teléfono
+(WhatsApp → Ajustes → Dispositivos vinculados → Vincular un dispositivo).
+La sesión queda guardada: en los próximos arranques se reconecta sola.
+
+## ⚠️ Aviso importante
+
+Esta herramienta se conecta a WhatsApp de forma **no oficial** (como WhatsApp Web, vía Baileys).
+Esto **infringe los Términos de Servicio de WhatsApp** y existe **riesgo de bloqueo del número**,
+especialmente con envíos masivos o automatizados. Úsalo de forma responsable, preferentemente con
+números secundarios, y sin spam. No nos responsabilizamos por bloqueos de cuenta.
+
+## 🗺️ Próximas fases (no incluidas en v1)
+
+- Calificación **automática** por palabras clave / IA al leer la conversación.
+- Multimedia (imágenes, audios, documentos) y respuestas rápidas / plantillas.
+- Ventana flotante / extensión sobre WhatsApp Web.
+- Multiusuario, asignación de chats y roles.
+- Migración a Postgres y despliegue gestionado.
+
+## 📂 Estructura
+
+```
+.
+├── server/   # Backend (Baileys + Express + Socket.IO + Prisma/SQLite)
+├── web/      # Frontend (React + Vite + Tailwind)
+└── legacy/   # CRM demo anterior (archivado)
+```

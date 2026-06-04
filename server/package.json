@@ -1,0 +1,28 @@
+{
+  "name": "wacrm-server",
+  "version": "0.1.0",
+  "description": "Backend del CRM-WhatsApp (Baileys + Express + Socket.IO + Prisma)",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "node --watch src/index.js",
+    "start": "node src/index.js",
+    "db:push": "prisma db push",
+    "db:generate": "prisma generate",
+    "db:studio": "prisma studio"
+  },
+  "dependencies": {
+    "@hapi/boom": "^10.0.1",
+    "@prisma/client": "^5.18.0",
+    "@whiskeysockets/baileys": "^6.7.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "pino": "^9.3.2",
+    "qrcode": "^1.5.4",
+    "socket.io": "^4.7.5"
+  },
+  "devDependencies": {
+    "prisma": "^5.18.0"
+  }
+}

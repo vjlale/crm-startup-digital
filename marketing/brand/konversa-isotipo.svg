@@ -1,0 +1,13 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Konversa">
+  <defs>
+    <linearGradient id="kvGrad" x1="0" y1="0" x2="128" y2="128" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#10b981"/>
+      <stop offset="1" stop-color="#047857"/>
+    </linearGradient>
+  </defs>
+  <!-- Burbuja de chat -->
+  <path d="M28 16h72a16 16 0 0 1 16 16v44a16 16 0 0 1-16 16H58l-22 20a3 3 0 0 1-5-2.2V92h-3a16 16 0 0 1-16-16V32a16 16 0 0 1 16-16Z" fill="url(#kvGrad)"/>
+  <!-- Flecha de crecimiento (ventas) -->
+  <path d="M40 74 56 58l12 12 22-26" stroke="#ffffff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <path d="M78 44h14v14" stroke="#ffffff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg>
