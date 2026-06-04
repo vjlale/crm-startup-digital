@@ -24,10 +24,10 @@ marketing/
 | Calendario Instagram (4 semanas) | ✅ Hecho | `instagram/calendario.md` |
 | Copys Instagram (12 piezas) | ✅ Hecho | `instagram/copys.md` |
 | Piezas Instagram (27 PNG: posts, 4 carruseles, historia) | ✅ Hecho | `instagram/piezas/` |
-| Guion PDF comercial | ✅ Hecho | `comercial/guion-presentacion.md` |
-| Landing page | ✅ Hecho (v1) | `landing/index.html` |
+| Mockups del producto (Bandeja, Pipeline, Dashboard) | ✅ Hecho | `mockups/` |
+| PDF comercial (10 páginas, con mockups) | ✅ Hecho | `comercial/konversa-presentacion.pdf` |
+| Landing page (con mockups del producto) | ✅ Hecho (v2) | `landing/index.html` |
 | Demo seed para capturas | ✅ Hecho | `../server/scripts/seed-demo.js` |
-| Capturas reales de la app | ⏳ Pendiente (requiere navegador local) | `screenshots/README.md` |
 | Sistema de diseño en Figma | ✅ Hecho (Brand + 4 plantillas IG editables) | `figma.md` |
 | Fan page (foto perfil + portada) | ✅ Hecho | `facebook/` |
 
