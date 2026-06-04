@@ -1,0 +1,37 @@
+# Entorno de DEMO aislado para sacar capturas de marketing.
+# Corre en paralelo a producción, con OTROS puertos y OTRA base de datos.
+# NO comparte volumen con producción: tus datos reales no se tocan.
+#
+#   Levantar:  ./demo.sh
+#   Bajar:     docker compose -f docker-compose.demo.yml down -v
+#
+# Puertos: frontend 8090, backend 4010.
+name: konversa-demo
+
+services:
+  server-demo:
+    build: ../../server
+    ports:
+      - "4010:4000"
+    environment:
+      PORT: 4000
+      CLIENT_ORIGIN: ${DEMO_ORIGIN:-http://localhost:8090}
+      DATABASE_URL: file:/app/data/dev.db
+      WA_AUTH_DIR: /app/data/.wa-auth
+    volumes:
+      - demo-data:/app/data
+    restart: unless-stopped
+
+  web-demo:
+    build:
+      context: ../../web
+      args:
+        VITE_API_URL: ${DEMO_API_URL:-http://localhost:4010}
+    ports:
+      - "8090:80"
+    depends_on:
+      - server-demo
+    restart: unless-stopped
+
+volumes:
+  demo-data:
