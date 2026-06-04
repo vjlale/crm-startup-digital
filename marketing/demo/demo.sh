@@ -7,7 +7,7 @@ set -e
 cd "$(dirname "$0")"
 
 # Detectar host público (para que el navegador llegue al backend de demo).
-IP="$(curl -fsS https://api.ipify.org 2>/dev/null || echo localhost)"
+IP="$(curl -fsS --connect-timeout 3 --max-time 5 https://api.ipify.org 2>/dev/null || echo localhost)"
 export DEMO_API_URL="http://${IP}:4010"
 export DEMO_ORIGIN="http://${IP}:8090"
 
@@ -15,7 +15,16 @@ echo "==> Construyendo y levantando la demo (host: ${IP})…"
 docker compose -f docker-compose.demo.yml up -d --build
 
 echo "==> Esperando al backend…"
-sleep 8
+ready=""
+for i in $(seq 1 30); do
+  if curl -fsS --max-time 3 "http://localhost:4010/api/health" >/dev/null 2>&1; then
+    ready="yes"
+    echo "    backend listo."
+    break
+  fi
+  sleep 2
+done
+[ -z "$ready" ] && echo "    (aviso) el backend tardó en responder; intento el seed igual…"
 
 echo "==> Cargando datos de demo…"
 docker compose -f docker-compose.demo.yml exec -T server-demo node scripts/seed-demo.js
