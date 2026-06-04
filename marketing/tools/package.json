@@ -8,6 +8,7 @@
     "instagram": "node generate-instagram.js"
   },
   "dependencies": {
-    "@resvg/resvg-js": "^2.6.2"
+    "@resvg/resvg-js": "^2.6.2",
+    "pdf-lib": "^1.17.1"
   }
 }
